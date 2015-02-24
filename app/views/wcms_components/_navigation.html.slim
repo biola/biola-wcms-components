@@ -1,0 +1,23 @@
+ruby:
+  menu ||= []
+  crumbs ||= [{
+    body: controller_name.titleize,
+    url: {controller: controller_name, action: :index}
+  }]
+  crumbs += Array(add_crumbs) if defined?(add_crumbs)
+
+
+#wcms_navigation
+  .container
+    - if menu.present?
+      .dropdown.custom-dropdown
+        a.dropdown-toggle href='#' data-toggle='dropdown' role='button' Menu
+        ul.dropdown-menu
+          - menu.each do |link|
+            = nav_link(link[:body], link[:url])
+    - else
+      = link_to 'Home', root_url, class: 'top-nav-link'
+
+    - crumbs.each do |crumb|
+      i class='fa fa-angle-right'
+      = link_to crumb[:body], crumb[:url], class: 'top-nav-link'

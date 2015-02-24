@@ -1,0 +1,24 @@
+#wcms_navigation {
+  background-color: #f3f3f3;
+  border-bottom: 1px solid #ddd;
+
+  a.top-nav-link {
+    display: inline-block;
+    padding: 10px 0 10px;
+    color: inherit;
+  }
+  .fa-angle-right {
+    padding: 0 10px;
+  }
+
+  .custom-dropdown {
+    .dropdown-toggle {
+      color: inherit;
+    }
+    .dropdown-menu > .active > a {
+      background: none;
+      color: black;
+      font-weight: bold;
+    }
+  }
+}
