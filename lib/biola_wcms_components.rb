@@ -1,0 +1,17 @@
+require "biola_wcms_components/version"
+require "biola_wcms_components/engine" if defined?(::Rails)
+require "coffee-rails"
+require "sass-rails"
+require "slim"
+
+module BiolaWcmsComponents
+  require 'biola_wcms_components/configuration'
+
+  def self.configure
+    yield config
+  end
+
+  def self.config
+    @config ||= Configuration.new
+  end
+end
