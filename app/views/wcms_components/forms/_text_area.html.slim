@@ -1,0 +1,13 @@
+ruby:
+  form ||= nil
+  attribute ||= nil
+  html_class ||= 'form-control'
+  value ||= nil
+
+  html_options = {class: html_class}
+  html_options[:value] = value if value.present?  # you don't want to pass value as an option if it is nil
+
+- if form
+  = form.text_area attribute, html_options
+- else
+  = text_area_tag attribute, value, html_options

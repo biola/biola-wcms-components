@@ -47,7 +47,7 @@ $(document).ready ->
     # Setup drag-drop image upload
     ##############################
     uploadImage = (file, input) ->
-      embeddedImage.sendFileToServer file, ((url) ->
+      fileUploader.sendFileToServer file, 'embedded_image', ((url) ->
         input.value = url
       ), ->
         alert('There was a problem uploading the image')

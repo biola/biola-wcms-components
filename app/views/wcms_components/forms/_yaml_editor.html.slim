@@ -1,0 +1,16 @@
+ruby:
+  form ||= nil
+  attribute ||= nil
+  html_class ||= 'form-control'
+  value ||= nil
+  embedded_image_url ||= nil  # should be the post url for creating new embedded images
+
+  # Set default value
+  # We have to do it this way in case value is an empty string (as opposed to nil).
+  value = value.presence || "---\n# YAML data goes here...\n"
+
+
+= wcms_component("shared/embedded_image_uploader", embedded_image_url: embedded_image_url)
+
+.ace_yaml_editor
+  = wcms_component("forms/text_area", {form: form, attribute: attribute, html_class: html_class, value: value})

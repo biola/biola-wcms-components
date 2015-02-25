@@ -48,8 +48,9 @@ class PresentationDataEditor
   end
 
   def raw_data_editor
-    form.text_area(:presentation_data_json, class: 'form-control json_editor') +
-    view.content_tag(:div, '', id: 'json_schema_editor')
+    view.content_tag :div, '', class: 'ace_json_editor' do
+      form.text_area(:presentation_data_json, class: 'form-control')
+    end
   end
 
   def array_of_attributes(attributes, parent_keys=[], wrapper_class: 'nest')

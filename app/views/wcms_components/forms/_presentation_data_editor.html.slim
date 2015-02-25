@@ -12,11 +12,7 @@ ruby:
   form ||= nil
   embedded_image_url ||= nil  # should be the post url for creating new embedded images
 
-/ Configure embedded image uploader
-- if embedded_image_url.present?
-  javascript:
-    window.embeddedImage = window.embeddedImage || {};
-    window.embeddedImage.uploadUrl = "#{embedded_image_url}";
+= wcms_component("shared/embedded_image_uploader", embedded_image_url: embedded_image_url)
 
 / Render HTML for presentation data editor
 = PresentationDataEditor.new(self, presentation_data, schema, form).render

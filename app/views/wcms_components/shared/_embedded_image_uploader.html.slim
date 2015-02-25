@@ -1,0 +1,6 @@
+ruby:
+  embedded_image_url ||= nil  # should be the post url for creating new embedded images
+
+- if embedded_image_url
+  javascript:
+    fileUploader.addUploader('embedded_image', "#{embedded_image_url}");
