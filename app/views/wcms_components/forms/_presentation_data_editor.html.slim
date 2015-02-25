@@ -1,9 +1,9 @@
 / Example:
-/ = wcms_component("forms/presentation_data_editor", { \
+/ = wcms_component "forms/presentation_data_editor",
 /   schema: @generic_object.presentation_data_template.schema,
 /   data: @generic_object.presentation_data,
 /   form: f,
-/   embedded_image_url: create_embedded_images_url})
+/   embedded_image_url: create_embedded_images_url
 /
 
 ruby:
@@ -12,7 +12,25 @@ ruby:
   form ||= nil
   embedded_image_url ||= nil  # should be the post url for creating new embedded images
 
-= wcms_component("shared/embedded_image_uploader", embedded_image_url: embedded_image_url)
+= wcms_component "shared/embedded_image_uploader",
+  embedded_image_url: embedded_image_url
 
-/ Render HTML for presentation data editor
-= PresentationDataEditor.new(self, presentation_data, schema, form).render
+
+/ Link to toggle between simple and advanced editors
+- if current_user.try(:admin?)
+  - if params[:edit_raw_data] == 'true'
+      = link_to('Simple Editor', params.merge(edit_raw_data: nil), class: 'pull-right')
+  - else
+      = link_to('Edit Raw Data', params.merge(edit_raw_data: true), class: 'pull-right')
+  .clearfix
+
+
+- if params[:edit_raw_data] == 'true' && current_user.try(:admin?)
+  / Render JSON editor
+  = wcms_component 'forms/json_editor',
+    form: form,
+    attribute: :presentation_data_json
+
+- else
+  / Render HTML for presentation data editor
+  = PresentationDataEditor.new(self, presentation_data, schema, form).render

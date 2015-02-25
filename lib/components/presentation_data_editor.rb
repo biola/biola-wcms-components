@@ -21,36 +21,7 @@ class PresentationDataEditor
   private
 
   def presentation_data_editor
-    view.content_tag :div, id: 'presentation_data_editor' do
-      choose_editor_link + view.content_tag(:div, "", class: 'clearfix') +
-      render_editor
-    end
-  end
-
-  def choose_editor_link
-    if view.current_user.try(:admin?)
-      if view.params[:edit_raw_data] == 'true'
-        view.link_to('Simple Editor', view.params.merge(edit_raw_data: nil), class: 'pull-right')
-      else
-        view.link_to('Edit Raw Data', view.params.merge(edit_raw_data: true), class: 'pull-right')
-      end
-    else
-      ''.html_safe
-    end
-  end
-
-  def render_editor
-    if view.params[:edit_raw_data] == 'true' && view.current_user.try(:admin?)
-      raw_data_editor
-    else
-      array_of_attributes(schema)
-    end
-  end
-
-  def raw_data_editor
-    view.content_tag :div, '', class: 'ace_json_editor' do
-      form.text_area(:presentation_data_json, class: 'form-control')
-    end
+    view.content_tag :div, array_of_attributes(schema), id: 'presentation_data_editor'
   end
 
   def array_of_attributes(attributes, parent_keys=[], wrapper_class: 'nest')
