@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = BiolaWcmsComponents::VERSION
   spec.authors       = ["Ryan Hall"]
   spec.email         = ["ryan.hall@biola.edu"]
-  spec.description   = %q{this is a description}
-  spec.summary       = %q{this is a summary}
-  spec.homepage      = ""
+  spec.description   = %q{Reusable UX components for use in or WCMS projects}
+  spec.summary       = %q{Reusable UX components for use in or WCMS projects}
+  spec.homepage      = "https://github.com/biola/biola-wcms-components"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
