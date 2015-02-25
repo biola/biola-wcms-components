@@ -1,0 +1,12 @@
+ruby:
+  lookup_url ||= nil
+
+- if lookup_url
+  .person-lookup data-lookup-url=lookup_url
+    = hidden_field_tag :person_id, '', class: 'hidden-person-id'
+    = text_field_tag :person_name, '', placeholder: 'First or last name', required: true, class: 'form-control typeahead'
+
+- else
+  p
+    ' Please specify
+    code = ":lookup_url"
