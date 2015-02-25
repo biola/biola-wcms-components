@@ -1,6 +1,6 @@
 # Biola WCMS Components
 
-This provides reusable components for our differnet WCMS apps
+This provides reusable UX components for our differnet WCMS projects
 
 ## Installation
 
@@ -18,8 +18,11 @@ Or install it yourself as:
 
 #### Dependencies
 
+* ace-rails-ap
 * coffee-rails
+* sass-rails
 * slim
+* rails (this is not an explicit dependency but I haven't tested it using anything else)
 
 ## Usage
 
@@ -27,26 +30,38 @@ Or install it yourself as:
 
 Include the following in `application.css.scss`.
 
-    @import "biola-frontend-toolkit";
+    @import "biola-wcms-components";
 
 Include the following in `application.js.coffee`.
 
-    #= require biola-frontend-toolkit
+    #= require biola-wcms-components
+
+
+### Components
+
+In your view file, you will render `wcms_component("path/to/component", options)`
+
+Example:
+
+    = wcms_component "forms/presentation_data_editor",
+      schema: @generic_object.presentation_data_template.schema,
+      data: @generic_object.presentation_data,
+      form: f,
+      embedded_image_url: create_embedded_images_url
+
+Currently, look in `app/views/wcms_components` for available components.
 
 
 #### Other requirements
 
-* `current_user` - When a user is logged in
-* `logout_path` - Should return a link to the logout path
-* `/whateverpath?login=true` - Should be caught by ApplicationController and redirect to login page if not already logged in.
-
+* `current_user` - should be defined an ApplicationController. Should return user when logged in
 
 #### Configuration
 
 Create a new file called `/config/initializers/biola_wcms_components.rb`
 
     BiolaWcmsComponents.configure do |config|
-      config.app_name = Settings.app.name
+      config.default_redactor_buttons = ['bold', 'italic', 'orderedlist', 'unorderedlist']
     end
 
 
