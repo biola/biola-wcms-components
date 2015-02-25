@@ -1,0 +1,22 @@
+/ Example:
+/ = wcms_component("forms/presentation_data_editor", { \
+/   schema: @generic_object.presentation_data_template.schema,
+/   data: @generic_object.presentation_data,
+/   form: f,
+/   embedded_image_url: create_embedded_images_url})
+/
+
+ruby:
+  schema ||= []
+  presentation_data ||= {}
+  form ||= nil
+  embedded_image_url ||= nil  # should be the post url for creating new embedded images
+
+/ Configure embedded image uploader
+- if embedded_image_url.present?
+  javascript:
+    window.embeddedImage = window.embeddedImage || {};
+    window.embeddedImage.uploadUrl = "#{embedded_image_url}";
+
+/ Render HTML for presentation data editor
+= PresentationDataEditor.new(self, presentation_data, schema, form).render

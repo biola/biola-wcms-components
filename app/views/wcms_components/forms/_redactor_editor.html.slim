@@ -1,0 +1,32 @@
+/ Example:
+/   = wcms_component("forms/redactor_editor", {form: f,
+/     attribute: :body,
+/     add_buttons: ['link'],
+/   })
+
+
+ruby:
+  # Default Parameters
+  form ||= nil
+  attribute ||= nil  # attribute name that the editor should be attached to
+  add_class ||= ""   # string of additional classes that get appended to class
+  input_class ||= "form-control redactor #{add_class}"
+  value ||= nil     # only used if form is nil
+
+  # Configure buttons
+  buttons ||= BiolaWcmsComponents.config.default_redactor_buttons
+  add_buttons ||= []      # adds to defaults
+  remove_buttons ||= []   # removes from default
+  buttons = Array(buttons) + Array(add_buttons) - Array(remove_buttons)
+  buttons << 'html_options' if current_user.try(:admin?)
+  buttons << 'fullscreen'
+
+  # Turn buttons into a string and make sure there are no duplicates
+  buttons = buttons.uniq.join(' ')
+
+
+
+- if form
+  = form.text_area attribute, class: input_class, 'data-buttons' => buttons
+- else
+  = text_area_tag attribute, value, class: input_class, 'data-buttons' => buttons

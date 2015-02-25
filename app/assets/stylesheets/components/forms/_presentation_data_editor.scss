@@ -1,0 +1,38 @@
+#presentation_data_editor {
+  margin-bottom: 20px;
+
+  > .nest .nest {
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    padding: 20px 0 0 20px;
+
+    h4 {
+      margin: 30px 0 5px 0;
+    }
+  }
+
+  // Wraps Array name and items
+  .array_wrapper {
+    margin-bottom: 20px;
+  }
+
+  .array_item {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    // Make the border touch the nested border
+    margin-left: -20px;
+    padding-left: 20px;
+
+    // Framework item doesn't get saved
+    //   it is just there for building out new items
+    &.framework {
+      display: none;
+    }
+  }
+
+  .drop-image-uploader {
+    &.dragging { background-color: #deedff; }
+  }
+}

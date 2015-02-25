@@ -18,3 +18,4 @@ end
 
 
 autoload :MenuBlock, 'components/menu_block'
+autoload :PresentationDataEditor, 'components/presentation_data_editor'
