@@ -1,4 +1,7 @@
+// Mixins and settings
 @import "./settings.scss";
 @import "./mixins";
-@import "./components/*";
+
+// Components
+@import "./components/navigation/*";
 @import "./components/alerts/*";

@@ -23,5 +23,10 @@ module WcmsComponents
       end
     end
 
+    # Gets used by the side menu / page navigation
+    def menu_block(html_options = {}, &block)
+      MenuBlock.new(self, html_options).render(&block)
+    end
+
   end
 end

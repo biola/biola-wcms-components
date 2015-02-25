@@ -15,3 +15,6 @@ module BiolaWcmsComponents
     @config ||= Configuration.new
   end
 end
+
+
+autoload :MenuBlock, 'components/menu_block'

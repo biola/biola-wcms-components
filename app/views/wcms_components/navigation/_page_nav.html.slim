@@ -1,0 +1,33 @@
+/ I'm going to wait to implement this one fully...
+/ The problem is going to be supporting submenus like on profile publisher
+/
+/ Example:
+/ = wcms_component('navigation/page_menu', { menu_items: [ \
+/   {body: 'Profile', url: edit_academic_program_path(@academic_program, page: 'profile'), default: true },
+/   {body: 'Relationships', url: edit_academic_program_path(@academic_program, page: 'relationships') },
+/   {body: 'Concentrations', url: edit_academic_program_path(@academic_program, page: 'concentrations') },
+/   {body: 'Degree Requirements', url: edit_academic_program_path(@academic_program, page: 'degree_requirements') },
+/   {body: 'Requirement Sections', url: edit_academic_program_path(@academic_program, page: 'requirement_sections') },
+/   {body: 'Outcomes', url: edit_academic_program_path(@academic_program, page: 'outcomes') },
+/   {body: 'Attachments', url: edit_academic_program_path(@academic_program, page: 'attachments') },
+/   {body: 'Banner', url: edit_academic_program_path(@academic_program, page: 'banner') },
+/   {body: 'Presentation Data', url: edit_academic_program_path(@academic_program, page: 'presentation_data') },
+/   {body: 'History', url: edit_academic_program_path(@academic_program, page: 'activity_logs'), visible: policy(@academic_program).can_manage?(:activity_logs) },
+/ ]})
+/
+
+
+
+/---------------
+/ ON HOLD...
+/---------------
+/ ruby:
+/   menu_items ||= []
+
+/ = menu_block(class: 'list-group-item') do |menu|
+/   - menu_items.each do |item|
+/     / It needs to be explicitly set to false to be hidden
+/     - unless item.visible == false
+/       = menu.add_item(item[:body], default: item[:default]) { item[:url] }
+
+

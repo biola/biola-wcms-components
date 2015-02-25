@@ -1,3 +1,18 @@
+/ Parameters
+/   menu: Array of hashes. This is what goes in the dropdown menu
+/     body: This is the link text
+/     url: This is where the link will go. Gets processed by url_for()
+/   crumbs: (optional) Array of hashes. These are the crumbs after the main menu
+/   add_crumbs: (optional) Array of hashes. These get pushed onto the default crumbs
+/
+/ Example:
+/ = wcms_component('navigation/site_nav', { menu: [ \
+/   {body: 'Academic Programs', url: :academic_programs_path},
+/   {body: 'Schools', url: :schools_path},
+/   {body: 'ULOs', url: :university_learning_outcomes_path},
+/ ]})
+/
+
 ruby:
   menu ||= []
   crumbs ||= [{
@@ -7,7 +22,7 @@ ruby:
   crumbs += Array(add_crumbs) if defined?(add_crumbs)
 
 
-#wcms_navigation
+#wcms_site_navigation
   .container
     - if menu.present?
       .dropdown.custom-dropdown
