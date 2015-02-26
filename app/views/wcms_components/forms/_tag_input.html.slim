@@ -1,0 +1,10 @@
+ruby:
+  form ||= nil
+  attribute ||= nil
+  value ||= value
+  html_class ||= 'form-control'
+
+- if form
+  = form.text_field attribute, class: html_class, 'data-role' => 'tagsinput'
+- else
+  = text_field_tag attribute, value, class: html_class, 'data-role' => 'tagsinput'

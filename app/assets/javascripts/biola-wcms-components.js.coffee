@@ -7,6 +7,8 @@
 #= require handlebars
 #= require typeahead
 #
+#= require bootstrap-tagsinput
+#
 #= require redactor
 #= require redactor_fullscreen
 #
