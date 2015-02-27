@@ -3,7 +3,7 @@ ruby:
   attribute ||= nil
   html_class ||= 'form-control'
   value ||= nil
-  embedded_image_url ||= nil  # should be the post url for creating new embedded images
+  embedded_image_url ||= wcms_components_embedded_images_url
 
   # Set default value
   # We have to do it this way in case value is an empty string (as opposed to nil).

@@ -1,16 +1,15 @@
 / Example:
 / = wcms_component "forms/presentation_data_editor",
-/   schema: @generic_object.presentation_data_template.schema,
-/   presentation_data: @generic_object.presentation_data,
 /   form: f,
-/   embedded_image_url: create_embedded_images_url
+/   schema: @generic_object.presentation_data_template.schema,
+/   presentation_data: @generic_object.presentation_data
 /
 
 ruby:
   schema ||= []
   presentation_data ||= {}
   form ||= nil
-  embedded_image_url ||= nil  # should be the post url for creating new embedded images
+  embedded_image_url ||= wcms_components_embedded_images_url
 
 = wcms_component "shared/embedded_image_uploader",
   embedded_image_url: embedded_image_url
