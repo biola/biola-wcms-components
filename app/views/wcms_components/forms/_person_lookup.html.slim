@@ -1,10 +1,19 @@
 ruby:
+  form ||= nil
+  person_id_key ||= :person_id
   lookup_url ||= wcms_components_people_url
+  placeholder ||= 'First or last name'
+  required ||= false
+
+  html_options = {placeholder: placeholder, required: required, class: 'form-control typeahead'}
 
 - if lookup_url
   .person-lookup data-lookup-url=lookup_url
-    = hidden_field_tag :person_id, '', class: 'hidden-person-id'
-    = text_field_tag :person_name, '', placeholder: 'First or last name', required: true, class: 'form-control typeahead'
+    - if form
+      = form.hidden_field person_id_key, class: 'hidden-person-id'
+    - else
+      = hidden_field_tag person_id_key, '', class: 'hidden-person-id'
+    = text_field_tag :person_name, '', html_options
 
 - else
   p

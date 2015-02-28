@@ -1,10 +1,26 @@
+/ Example:
+/   = wcms_component "forms/tag_input",
+/     form: f,
+/     attribute: :courses_string,
+/     typeahead: { url: courses_path(format: :json), key: 'course_key'}
+/
+
+
 ruby:
   form ||= nil
   attribute ||= nil
   value ||= value
   html_class ||= 'form-control'
+  typeahead ||= nil  # for available options see tag_input.js.coffee
+  options ||= {}
+  html_options = options.merge({
+    class: html_class,
+    data: {role: 'tagsinput', typeahead: typeahead}
+  })
+  html_options[:value] = value unless value.nil?
+
 
 - if form
-  = form.text_field attribute, class: html_class, 'data-role' => 'tagsinput'
+  = form.text_field attribute, html_options
 - else
-  = text_field_tag attribute, value, class: html_class, 'data-role' => 'tagsinput'
+  = text_field_tag attribute, value, html_options

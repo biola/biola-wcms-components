@@ -1,3 +1,6 @@
+// NOTE: There are a few places I made changes to,
+//  so consider them when updating. Search this document for the key "CHANGED"
+//
 // https://github.com/timschlechter/bootstrap-tagsinput
 // Vesion: 0.4.2
 
@@ -46,7 +49,7 @@
 
     this.$element.after(this.$container);
 
-    // Ryan: This is keeping the input from resizing automatically.
+    // CHANGED: (RH) This is keeping the input from resizing automatically.
     // var inputWidth = (this.inputSize < 3 ? 3 : this.inputSize) + "em";
     // this.$input.get(0).style.cssText = "min-width: " + inputWidth + "";
     this.build(options);
@@ -266,56 +269,7 @@
       makeOptionItemFunction(self.options, 'itemText');
       makeOptionFunction(self.options, 'tagClass');
 
-      // Typeahead Bootstrap version 2.3.2
-      if (self.options.typeahead) {
-        var typeahead = self.options.typeahead || {};
-
-        makeOptionFunction(typeahead, 'source');
-
-        self.$input.typeahead($.extend({}, typeahead, {
-          source: function (query, process) {
-            function processItems(items) {
-              var texts = [];
-
-              for (var i = 0; i < items.length; i++) {
-                var text = self.options.itemText(items[i]);
-                map[text] = items[i];
-                texts.push(text);
-              }
-              process(texts);
-            }
-
-            this.map = {};
-            var map = this.map,
-                data = typeahead.source(query);
-
-            if ($.isFunction(data.success)) {
-              // support for Angular callbacks
-              data.success(processItems);
-            } else if ($.isFunction(data.then)) {
-              // support for Angular promises
-              data.then(processItems);
-            } else {
-              // support for functions and jquery promises
-              $.when(data)
-               .then(processItems);
-            }
-          },
-          updater: function (text) {
-            self.add(this.map[text]);
-          },
-          matcher: function (text) {
-            return (text.toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1);
-          },
-          sorter: function (texts) {
-            return texts.sort();
-          },
-          highlighter: function (text) {
-            var regex = new RegExp( '(' + this.query + ')', 'gi' );
-            return text.replace( regex, "<strong>$1</strong>" );
-          }
-        }));
-      }
+      // CHANGED: (RH) Removed support for Typeahead Bootstrap version 2.3.2
 
       // typeahead.js
       if (self.options.typeaheadjs) {
@@ -619,7 +573,8 @@
    * Initialize tagsinput behaviour on inputs and selects which have
    * data-role=tagsinput
    */
-  $(function() {
-    $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
-  });
+  // CHANGED: (RH) I do this myself... see tag_input.js.cofee
+  // $(function() {
+  //   $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
+  // });
 })(window.jQuery);

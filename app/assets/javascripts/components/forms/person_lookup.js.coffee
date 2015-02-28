@@ -3,7 +3,7 @@ $(document).ready ->
     people_search_url = $('.person-lookup').first().data('lookup-url')
 
     peopleSearch = new Bloodhound(
-      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value')
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('id')
       queryTokenizer: Bloodhound.tokenizers.whitespace
       # The prefetch url returns a list of all the faculty
       prefetch: people_search_url
