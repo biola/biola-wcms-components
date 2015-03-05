@@ -3,10 +3,12 @@ ruby:
   attribute ||= nil
   value ||= value
   html_class ||= 'form-control'
+  lookup_url ||= wcms_components_tags_url
 
 
 = wcms_component "forms/tag_input",
   form: form,
   attribute: :related_object_tags_string,
   value: value,
-  html_class: html_class
+  html_class: html_class,
+  typeahead: { url: wcms_components_tags_url(format: :json), key: 'tag'}

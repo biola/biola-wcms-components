@@ -2,9 +2,8 @@ Rails.application.routes.draw do
 
   namespace :wcms_components do
     resources :embedded_images, only: [:create], defaults: { format: 'json' }
-
-    # "people#index" is used for search purposes
     resources :people, only: [:index], defaults: { format: 'json' }
+    resources :tags, only: [:index], defaults: { format: 'json' }
   end
 
   # this is just a convenience to create a named route to rack-cas' logout
