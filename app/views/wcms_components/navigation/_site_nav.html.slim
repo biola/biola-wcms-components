@@ -15,10 +15,16 @@
 
 ruby:
   menu ||= []
-  crumbs ||= [{
-    body: controller_name.titleize,
-    url: {controller: controller_name, action: :index}
+  default_crumbs = []
+
+  # Set @parent if you have nested routes.
+  _root_controller = @parent ? @parent.class.to_s.tableize : controller_name
+  default_crumbs = [{
+    body: _root_controller.titleize,
+    url: {controller: _root_controller, action: :index}
   }]
+
+  crumbs ||= default_crumbs
   crumbs += Array(add_crumbs) if defined?(add_crumbs)
 
 
