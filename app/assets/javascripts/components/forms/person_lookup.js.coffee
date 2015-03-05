@@ -5,8 +5,6 @@ $(document).ready ->
     peopleSearch = new Bloodhound(
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('id')
       queryTokenizer: Bloodhound.tokenizers.whitespace
-      # The prefetch url returns a list of all the faculty
-      prefetch: people_search_url
       remote: people_search_url + '?q=%QUERY'
     )
 
