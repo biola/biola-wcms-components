@@ -1,6 +1,10 @@
+/ Example
+/   = wcms_component 'forms/related_object_tags', form: f
+/
+
 ruby:
   form ||= nil
-  attribute ||= nil
+  attribute ||= :related_object_tags_string
   value ||= value
   html_class ||= 'form-control'
   lookup_url ||= wcms_components_tags_url
@@ -8,7 +12,7 @@ ruby:
 
 = wcms_component "forms/tag_input",
   form: form,
-  attribute: :related_object_tags_string,
+  attribute: attribute,
   value: value,
   html_class: html_class,
   typeahead: { url: wcms_components_tags_url(format: :json), key: 'tag'}
