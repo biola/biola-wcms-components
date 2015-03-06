@@ -1,8 +1,9 @@
 / Example:
-/   = wcms_component("forms/redactor_editor", {form: f,
+/   = wcms_component "forms/redactor_editor",
+/     form: f,
 /     attribute: :body,
-/     add_buttons: ['link'],
-/   })
+/     add_buttons: ['link']
+/
 
 
 ruby:
@@ -18,15 +19,18 @@ ruby:
   add_buttons ||= []      # adds to defaults
   remove_buttons ||= []   # removes from default
   buttons = Array(buttons) + Array(add_buttons) - Array(remove_buttons)
-  buttons << 'html_options' if current_user.try(:admin?)
+  buttons << 'html' if current_user.try(:admin?)
   buttons << 'fullscreen'
 
-  # Turn buttons into a string and make sure there are no duplicates
+  formatting ||= []
+  buttons.unshift 'formatting' if formatting.length > 0
+
+
+  # Turn buttons and formatting into a string and remove duplicates
   buttons = buttons.uniq.join(' ')
-
-
+  formatting = formatting.uniq.join(' ')
 
 - if form
-  = form.text_area attribute, class: input_class, 'data-buttons' => buttons
+  = form.text_area attribute, class: input_class, 'data-buttons' => buttons, 'data-formatting' => formatting
 - else
-  = text_area_tag attribute, value, class: input_class, 'data-buttons' => buttons
+  = text_area_tag attribute, value, class: input_class, 'data-buttons' => buttons, 'data-formatting' => formatting

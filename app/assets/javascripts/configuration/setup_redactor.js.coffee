@@ -24,6 +24,7 @@ setupRedactor = (obj) ->
   options.buttons = $.unique(options.buttons)
   if formatting
     options.formatting = $.unique(options.formatting)
+    options.allowedTags = options.allowedTags.concat(options.formatting)
   options.allowedTags = $.unique(options.allowedTags)
 
   # Initialize redactor
