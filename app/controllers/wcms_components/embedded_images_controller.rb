@@ -13,7 +13,7 @@ class WcmsComponents::EmbeddedImagesController < ApplicationController
     if @embedded_image.save
       render json: { filelink: @embedded_image.upload.url }
     else
-      render json: { error: true, messages: @embedded_image.errors.full_messages}
+      render json: { error: true, messages: @embedded_image.errors.full_messages }
     end
   end
 

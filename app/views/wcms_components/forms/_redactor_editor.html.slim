@@ -30,6 +30,8 @@ ruby:
   buttons = buttons.uniq.join(' ')
   formatting = formatting.uniq.join(' ')
 
+= wcms_component "shared/embedded_image_uploader"
+
 - if form
   = form.text_area attribute, class: input_class, 'data-buttons' => buttons, 'data-formatting' => formatting
 - else

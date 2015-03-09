@@ -5,9 +5,13 @@ setupRedactor = (obj) ->
     allowedTags: ['p', 'br']
     buttons: []
 
+  if fileUploader.uploaders && fileUploader.uploaders.embedded_image
+    options.imageUpload = fileUploader.uploaders.embedded_image
+    options.allowedTags = $.merge(options.allowedTags, ['img'])
+
   # Add any custom data attributes to the default options
   if obj.data('linkable')  # in case you want to support links without explicitly giving a link button.
-    options.allowedTags = $.merge(options.allowedTags, 'a')
+    options.allowedTags = $.merge(options.allowedTags, ['a'])
   if data = obj.data('buttons')
     buttons = data.split(' ')
     options.buttons = $.merge(options.buttons, buttons)
