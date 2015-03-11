@@ -4,16 +4,28 @@ ruby:
   lookup_url ||= wcms_components_people_url
   placeholder ||= 'First or last name'
   required ||= false
+  person ||= nil
+  value ||= nil  # just an alias for person
 
-  html_options = {placeholder: placeholder, required: required, class: 'form-control typeahead'}
+  html_options = { placeholder: placeholder, required: required, class: 'form-control typeahead' }
+
+  # Find person object
+  if person
+    # don't override person if it is already set.
+  elsif value
+    person = value if value.is_a?(Person)
+  elsif form
+    person = Person.where(id: form.object[person_id_key]).first if form.object.respond_to?(person_id_key)
+  end
+
 
 - if lookup_url
   .person-lookup data-lookup-url=lookup_url
     - if form
       = form.hidden_field person_id_key, class: 'hidden-person-id'
     - else
-      = hidden_field_tag person_id_key, '', class: 'hidden-person-id'
-    = text_field_tag :person_name, '', html_options
+      = hidden_field_tag person_id_key, person.try(:id), class: 'hidden-person-id'
+    = text_field_tag :person_name, person.try(:name), html_options
 
 - else
   p
