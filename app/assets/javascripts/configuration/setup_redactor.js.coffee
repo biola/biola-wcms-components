@@ -4,6 +4,7 @@ setupRedactor = (obj) ->
     minHeight: 200
     allowedTags: ['p', 'br']
     buttons: []
+    toolbarFixed: false
 
   if fileUploader.uploaders && fileUploader.uploaders.embedded_image
     options.imageUpload = fileUploader.uploaders.embedded_image
