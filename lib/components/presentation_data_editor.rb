@@ -110,7 +110,7 @@ class PresentationDataEditor
   end
 
   def build_image_uploader(attribute, parent_keys)
-    view.content_tag :div, class: 'form-group' do
+    view.content_tag :div, class: 'form-group type-image-uploader' do
       view.label_tag(attribute[:name]) +
       view.text_field_tag(
         form_name(parent_keys, attribute[:name]),
@@ -120,7 +120,10 @@ class PresentationDataEditor
           id: attribute_id(parent_keys, attribute[:name]),
           placeholder: "Drop image here"
         }
-      )
+      ) +
+      view.content_tag(:div, class: 'image_preview') do
+        view.image_tag data_grab(parent_keys, attribute[:name])
+      end
     end
   end
 

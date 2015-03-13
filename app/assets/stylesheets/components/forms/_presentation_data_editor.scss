@@ -32,6 +32,9 @@
     }
   }
 
+  .type-image-uploader {
+    .image_preview img { margin-top: 5px; max-height: 300px; max-width: 100%; }
+  }
   .drop-image-uploader {
     &.dragging { background-color: #deedff; }
   }

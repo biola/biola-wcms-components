@@ -49,6 +49,7 @@ $(document).ready ->
     uploadImage = (file, input) ->
       fileUploader.sendFileToServer file, 'embedded_image', ((url) ->
         input.value = url
+        $(input).trigger('change')
       ), ->
         alert('There was a problem uploading the image')
 
@@ -67,3 +68,7 @@ $(document).ready ->
       event.stopPropagation()
       uploadImage(e.originalEvent.dataTransfer.files[0], this)
       $(this).removeClass('dragging')
+
+    # Update preview image whenever value changes
+    $('#presentation_data_editor').on 'change', 'input.drop-image-uploader', (e) ->
+      $(this).siblings('.image_preview').find('img').attr('src', this.value)
