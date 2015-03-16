@@ -10,6 +10,7 @@ ruby:
   form ||= nil
   attribute ||= nil
   value ||= value
+  separator ||= ','
   html_class ||= 'form-control'
   typeahead ||= nil  # for available options see tag_input.js.coffee
   options ||= {}
@@ -17,8 +18,12 @@ ruby:
     class: html_class,
     data: {role: 'tagsinput', typeahead: typeahead}
   })
-  html_options[:value] = value unless value.nil?
 
+  if form && attribute && form.object.respond_to?(attribute)
+    value ||= form.object[attribute]
+  end
+  value = value.join(separator) if value.is_a?(Array)
+  html_options[:value] = value unless value.nil?
 
 - if form
   = form.text_field attribute, html_options
