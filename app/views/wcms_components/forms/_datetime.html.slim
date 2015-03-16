@@ -1,0 +1,21 @@
+ruby:
+  # If you change parameters here, also change them in _date.html.slim
+  form ||= nil
+  attribute ||= nil
+  placeholder ||= nil
+  required ||= false
+  value ||= nil
+  format ||= 'datetime'
+
+  html_options = {
+    placeholder: placeholder,
+    required: required,
+    class: 'form-control chronic_ping',
+    data: {format: format}
+  }
+
+
+- if form
+  = form.text_field attribute, html_options
+- else
+  = text_field_tag attribute, value, html_options

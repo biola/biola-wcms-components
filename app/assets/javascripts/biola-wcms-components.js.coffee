@@ -12,6 +12,8 @@
 #= require redactor
 #= require redactor_fullscreen
 #
+#= require chronic_ping
+#
 #= require_tree ./configuration
 #= require_tree ./components
 #= require_self

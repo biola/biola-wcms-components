@@ -1,0 +1,15 @@
+ruby:
+  form ||= nil
+  attribute ||= nil
+  placeholder ||= nil
+  required ||= false
+  value ||= nil
+  format ||= 'date'
+
+= wcms_component 'forms/datetime',
+  form: form,
+  attribute: attribute,
+  placeholder: placeholder,
+  required: required,
+  value: value,
+  format: format

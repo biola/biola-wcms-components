@@ -2,6 +2,7 @@ require "biola_wcms_components/version"
 require "biola_wcms_components/engine" if defined?(::Rails)
 require "ace-rails-ap"
 require "buweb_content_models"
+require "chronic_ping"
 require "pundit"
 require "coffee-rails"
 require "sass-rails"
