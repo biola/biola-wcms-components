@@ -1,0 +1,15 @@
+ruby:
+  raise 'Form parameter is required' if form.blank?
+
+  # You should be able to set target model to nil if you want,
+  #   though it should default to the form object's class
+  if !defined?(target_class)
+    target_class = form.object.class.to_s
+  end
+
+  templates = PresentationDataTemplate
+  templates = templates.where(target_class: target_class) if target_class
+
+p Please select a template for this presentation data.
+
+= form.collection_select :presentation_data_template_id, templates.asc(:title), :id, :title, {include_blank: true}, class: 'form-control'

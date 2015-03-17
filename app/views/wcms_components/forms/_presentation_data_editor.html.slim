@@ -6,9 +6,13 @@
 /
 
 ruby:
+  if form ||= nil
+    schema ||= form.object.presentation_data_template.try(:schema)
+    presentation_data ||= form.object.presentation_data
+  end
+
   schema ||= []
   presentation_data ||= {}
-  form ||= nil
   embedded_image_url ||= wcms_components_embedded_images_url
 
 = wcms_component "shared/embedded_image_uploader",
