@@ -22,7 +22,7 @@ fileUploader.sendFileToServer = (file, urlKey, successCallback, errorCallback) -
   if fileUploader.uploaders[urlKey]
     form_data = new FormData()
     form_data.append('file', file)
-    form_data.append('authenticity_token', $('[name=csrf-token').attr('content'))
+    form_data.append('authenticity_token', $('[name=csrf-token]').attr('content'))
 
     xhr = new XMLHttpRequest()
     xhr.open "POST", fileUploader.uploaders[urlKey]
