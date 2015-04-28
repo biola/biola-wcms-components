@@ -1,0 +1,28 @@
+.side-menu {
+  a.list-group-item { background-color: #fafafa; color: #428bca; text-shadow: 0 1px 0 #fff;
+    &:hover { background-color: #fdfdfe; color: #428bca; }
+    i.fa { padding-right: 5px; }
+  }
+  .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    // Overwrite bootstrap
+    color: black; background-color: white; border-color: #dddddd;
+    // new
+    border-left-color: #CA4242; border-left-width: 2px; font-weight: 500;
+  }
+  .subitems {
+    a.list-group-item { padding-left: 30px; background-color: #fdfdfe;
+      &.active { border-left-color: #428bca; }
+    }
+  }
+
+  .list-group-item.top-item { background-color: #f3f3f3; font-weight: bold; line-height: 25px;
+    .img-wrapper { width: 25px; height: 25px; background-position: center; background-size: cover; border-radius: 3px; float: left; margin-right: 10px; }
+  }
+
+  // Overwrite bootstrap
+  .list-group .list-group-item:first-child { border-top-right-radius: 0px; border-top-left-radius: 0px; }
+  .list-group .list-group-item:last-child { margin-bottom: -1px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; }
+  // new
+  .list-group > .list-group-item:first-child { border-top-right-radius: 4px; border-top-left-radius: 4px; }
+  .list-group > .list-group-item:last-child { margin-bottom: 0px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; }
+}

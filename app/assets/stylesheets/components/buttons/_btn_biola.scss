@@ -1,0 +1,5 @@
+// Buttons
+.btn-biola { color: white; background-color: $color-biola-red; border-color: $color-biola-red-dark;
+  &:hover  { color: white; background-color: $color-biola-red-dark; }
+  &:focus  { color: white; }
+}
