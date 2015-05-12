@@ -1,0 +1,13 @@
+ruby:
+  raise 'Form parameter is required' if form.blank?
+
+  attribute ||= nil  # attribute name that the editor should be attached to
+  collection ||= nil
+  value_method ||= nil
+  text_method ||= nil
+
+  options = {}
+  html_options = {class: 'form-control bs-multiselect', multiple: "multiple"}
+
+div
+  = form.collection_select attribute, collection, value_method, text_method, options, html_options

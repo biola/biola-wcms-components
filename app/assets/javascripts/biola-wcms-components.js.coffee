@@ -7,6 +7,7 @@
 #= require handlebars
 #= require typeahead
 #
+#= require bootstrap-multiselect
 #= require bootstrap-tagsinput
 #
 #= require redactor
