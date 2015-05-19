@@ -19,7 +19,7 @@ ruby:
   add_buttons ||= []      # adds to defaults
   remove_buttons ||= []   # removes from default
   buttons = Array(buttons) + Array(add_buttons) - Array(remove_buttons)
-  buttons << 'html' if current_user.try(:admin?)
+  buttons << 'html' if current_user.try(:admin?) || current_user.try(:developer?) || current_user.try(:designer?)
   buttons << 'fullscreen'
 
   formatting ||= []
