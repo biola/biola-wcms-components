@@ -12,6 +12,8 @@
 #
 #= require redactor
 #= require redactor_fullscreen
+#= require redactor_table
+#= require redactor_video
 #
 #= require chronic_ping
 #

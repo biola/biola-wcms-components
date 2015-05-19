@@ -4,6 +4,7 @@ setupRedactor = (obj) ->
     minHeight: 200
     allowedTags: ['p', 'br']
     buttons: []
+    plugins: []
     toolbarFixed: false
 
   if fileUploader.uploaders && fileUploader.uploaders.embedded_image
@@ -23,7 +24,11 @@ setupRedactor = (obj) ->
   if options.allowedTags.indexOf('a') >= 0
     options.convertLinks = true;
   if options.buttons.indexOf('fullscreen') >= 0
-    options.plugins = ['fullscreen']
+    options.plugins.push 'fullscreen'
+  if options.buttons.indexOf('table') >= 0
+    options.plugins.push 'table'
+  if options.buttons.indexOf('video') >= 0
+    options.plugins.push 'video'
 
   # Uniq all arrays
   options.buttons = $.unique(options.buttons)
