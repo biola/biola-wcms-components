@@ -13,6 +13,7 @@ ruby:
   add_class ||= ""   # string of additional classes that get appended to class
   input_class ||= "form-control redactor #{add_class}"
   value ||= nil     # only used if form is nil
+  allow_divs ||= nil
 
   # Configure buttons
   buttons ||= BiolaWcmsComponents.config.default_redactor_buttons
@@ -33,6 +34,6 @@ ruby:
 = wcms_component "shared/embedded_image_uploader"
 
 - if form
-  = form.text_area attribute, class: input_class, 'data-buttons' => buttons, 'data-formatting' => formatting
+  = form.text_area attribute, class: input_class, 'data-buttons' => buttons, 'data-formatting' => formatting, 'data-allow-divs' => allow_divs
 - else
-  = text_area_tag attribute, value, class: input_class, 'data-buttons' => buttons, 'data-formatting' => formatting
+  = text_area_tag attribute, value, class: input_class, 'data-buttons' => buttons, 'data-formatting' => formatting, 'data-allow-divs' => allow_divs

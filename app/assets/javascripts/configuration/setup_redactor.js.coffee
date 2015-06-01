@@ -2,7 +2,7 @@ setupRedactor = (obj) ->
   # Default Options
   options =
     minHeight: 200
-    allowedTags: ['p', 'br']
+    allowedTags: ['p', 'br', 'span']
     buttons: []
     plugins: []
     toolbarFixed: false
@@ -14,6 +14,9 @@ setupRedactor = (obj) ->
   # Add any custom data attributes to the default options
   if obj.data('linkable')  # in case you want to support links without explicitly giving a link button.
     options.allowedTags = $.merge(options.allowedTags, ['a'])
+  if obj.data('allow-divs')
+    options.allowedTags = $.merge(options.allowedTags, ['div'])
+    options.replaceDivs = false
   if data = obj.data('buttons')
     buttons = data.split(' ')
     options.buttons = $.merge(options.buttons, buttons)
