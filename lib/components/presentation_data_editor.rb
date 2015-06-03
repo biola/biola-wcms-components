@@ -44,6 +44,10 @@ class PresentationDataEditor
       build_image_uploader(attribute, parent_keys)
     when 'html'
       build_html(attribute, parent_keys)
+    when 'checkbox'
+      build_check_box(attribute, parent_keys)
+    when 'number'
+      build_number(attribute, parent_keys)
     end
   end
 
@@ -98,6 +102,37 @@ class PresentationDataEditor
     view.content_tag :div, class: 'form-group' do
       view.label_tag(attribute[:name]) +
       view.text_field_tag(
+        form_name(parent_keys, attribute[:name]),
+        data_grab(parent_keys, attribute[:name]),
+        {
+          class: "form-control #{attribute[:class]}",
+          id: attribute_id(parent_keys, attribute[:name]),
+          placeholder: attribute[:placeholder]
+        }
+      )
+    end
+  end
+
+  def build_check_box(attribute, parent_keys)
+    view.content_tag :div, class: 'form-group' do
+      view.label_tag(attribute[:name]) +
+      view.check_box_tag(
+        form_name(parent_keys, attribute[:name]), # name
+        1, # value
+        data_grab(parent_keys, attribute[:name]).to_i == 1,# checked or not
+        { # options
+          class: "form-control #{attribute[:class]}",
+          id: attribute_id(parent_keys, attribute[:name]),
+          placeholder: attribute[:placeholder]
+        }
+      )
+    end
+  end
+
+  def build_number(attribute, parent_keys)
+    view.content_tag :div, class: 'form-group' do
+      view.label_tag(attribute[:name]) +
+      view.number_field_tag(
         form_name(parent_keys, attribute[:name]),
         data_grab(parent_keys, attribute[:name]),
         {
