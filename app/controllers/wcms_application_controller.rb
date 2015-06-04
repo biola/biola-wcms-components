@@ -2,8 +2,6 @@
 class WcmsApplicationController < ActionController::Base
   include Pundit
 
-  protect_from_forgery with: :exception
-
   before_action :authenticate!
   after_action :verify_authorized
   after_action :verify_policy_scoped, only: :index
