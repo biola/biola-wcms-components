@@ -38,4 +38,9 @@
   .drop-image-uploader {
     &.dragging { background-color: #deedff; }
   }
+
+  input.form-control[type="checkbox"] {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
 }

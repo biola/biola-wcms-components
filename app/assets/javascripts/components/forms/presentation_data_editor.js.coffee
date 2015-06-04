@@ -7,7 +7,7 @@ $(document).ready ->
 
     # Delete an array item when you click the delete button
     $('.array_wrapper').on 'click', '.delete_array_item', ->
-      $(this).parents('.array_item').remove()
+      $(this).parents('.array_item').first().remove()
       false
 
     # Add an new array item from the last array_item
