@@ -7,6 +7,9 @@
 #= require handlebars
 #= require typeahead
 #
+#  Needed for gallery photo sorting component
+#= require jquery-ui/sortable
+#
 #= require bootstrap-multiselect
 #= require bootstrap-tagsinput
 #
