@@ -5,9 +5,13 @@ ruby:
   collection ||= nil
   value_method ||= nil
   text_method ||= nil
+  multiple ||= nil
+  prompt ||= nil
 
   options = {}
-  html_options = {class: 'form-control bs-multiselect', multiple: "multiple"}
+  html_options = {class: 'form-control bs-multiselect'}
+  html_options[:multiple] = 'multiple' if multiple
+  options[:prompt] = prompt if prompt
 
 div
   = form.collection_select attribute, collection, value_method, text_method, options, html_options
