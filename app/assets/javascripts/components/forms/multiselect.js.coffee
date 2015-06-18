@@ -1,8 +1,12 @@
 $(document).ready ->
   $('.bs-multiselect').each ->
     $(this).multiselect
-      enableFiltering: true,
+      enableCaseInsensitiveFiltering: true
+      enableFiltering: true
       filterBehavior: 'value'
+      includeSelectAllOption: false
+      maxHeight: 400
+      numberDisplayed: 1
 
   # Replace glyphicons with fonticons
   if $('.bs-multiselect').length > 0
