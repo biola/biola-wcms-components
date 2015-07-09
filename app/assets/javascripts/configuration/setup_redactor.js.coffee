@@ -51,6 +51,7 @@ button_to_tag_mapping =
   orderedlist: ['ol', 'li']
   table: ['table', 'tr', 'tbody', 'td']
   unorderedlist: ['ul', 'li']
+  video: ['iframe']
 
 buttonsToTags = (buttons) ->
   tags = []
