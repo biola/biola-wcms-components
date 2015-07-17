@@ -171,7 +171,8 @@ class PresentationDataEditor
         {
           class: "redactor #{attribute[:class]}",
           id: attribute_id(parent_keys, attribute[:name]),
-          'data-buttons' => editor_buttons(attribute)
+          'data-buttons' => editor_buttons(attribute),
+          'data-formatting' => 'p h1 h2 h3 h4 h5 quote'
         }
       )
     end
@@ -227,9 +228,9 @@ class PresentationDataEditor
   end
 
   def editor_buttons(attribute)
-    default_buttons = %w(bold italic unorderedlist orderedlist link)
+    default_buttons = %w(formatting bold italic unorderedlist orderedlist link)
     buttons = attribute[:editor_buttons].to_s.split(' ').presence || default_buttons
-    buttons.push('html') if !buttons.include?('html') && view.current_user.try(:admin?)
+    buttons.push('html') if !buttons.include?('html')
     buttons.push('fullscreen') unless buttons.include?('fullscreen')
     buttons.join(' ')
   end
