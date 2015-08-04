@@ -3,7 +3,7 @@ $(document).ready ->
     $(this).multiselect
       enableCaseInsensitiveFiltering: true
       enableFiltering: true
-      filterBehavior: 'value'
+      filterBehavior: 'text' # The other option is value but dont change this. Things will break!
       includeSelectAllOption: false
       maxHeight: 400
       numberDisplayed: 1
