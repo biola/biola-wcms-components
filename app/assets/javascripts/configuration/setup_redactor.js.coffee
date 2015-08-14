@@ -49,7 +49,7 @@ button_to_tag_mapping =
   italic: ['i', 'em']
   link: ['a']
   orderedlist: ['ol', 'li']
-  table: ['table', 'tr', 'tbody', 'td']
+  table: ['table', 'tr', 'thead', 'th', 'tbody', 'td']
   unorderedlist: ['ul', 'li']
   video: ['iframe']
 
