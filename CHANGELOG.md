@@ -1,6 +1,9 @@
 # CHANGELOG
 
 ### Master (unreleased)
+### 0.15.3
+
+* Added select_tag to the multiselect form element with attributes
 
 ### 0.15.2
 
