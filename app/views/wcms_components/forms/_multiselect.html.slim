@@ -1,17 +1,22 @@
 ruby:
-  raise 'Form parameter is required' if form.blank?
 
+  form ||= nil
   attribute ||= nil  # attribute name that the editor should be attached to
   collection ||= nil
   value_method ||= nil
   text_method ||= nil
   multiple ||= nil
   prompt ||= nil
+  selected ||= nil
 
   options = {}
   html_options = {class: 'form-control bs-multiselect'}
   html_options[:multiple] = 'multiple' if multiple
-  options[:prompt] = prompt if prompt
+  options[:prompt] = prompt if prompt && form
+  html_options[:prompt] = prompt if prompt && !form
 
 div
-  = form.collection_select attribute, collection, value_method, text_method, options, html_options
+  - if form.present?
+    = form.collection_select attribute, collection, value_method, text_method, options, html_options
+  - else
+    = select_tag attribute, options_from_collection_for_select(collection, value_method, text_method, selected), html_options
