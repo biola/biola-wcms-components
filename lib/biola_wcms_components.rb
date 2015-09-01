@@ -25,4 +25,3 @@ end
 autoload :CasAuthentication, 'components/cas_authentication'
 autoload :GalleryPhotos, 'components/gallery_photos'
 autoload :MenuBlock, 'components/menu_block'
-autoload :PresentationDataEditor, 'components/presentation_data_editor'

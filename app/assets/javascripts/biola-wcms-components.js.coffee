@@ -2,7 +2,7 @@
 #= require ace/mode-yaml
 #= require ace/mode-json
 #= require ace/worker-json
-#
+# 
 #  Handlebars and typeahead are needed for the person-lookup component
 #= require handlebars
 #= require typeahead
@@ -12,6 +12,8 @@
 #
 #= require bootstrap-multiselect
 #= require bootstrap-tagsinput
+#
+#= require json-editor
 #
 #= require redactor
 #= require redactor_fullscreen
