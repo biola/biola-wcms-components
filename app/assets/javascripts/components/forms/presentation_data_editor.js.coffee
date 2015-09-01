@@ -8,7 +8,7 @@ $(document).ready ->
       options['schema'] = JSON.parse(element.dataset.schema)
     if element.dataset.startval
       options['startval'] = JSON.parse(element.dataset.startval)
-    
+
     editor = new JSONEditor(element, options)
 
     # Watch for form changes and apply them to the hidden json value field
