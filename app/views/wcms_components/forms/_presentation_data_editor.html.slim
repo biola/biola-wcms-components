@@ -7,33 +7,21 @@
 
 ruby:
   if form ||= nil
-    schema ||= form.object.presentation_data_template.try(:schema)
+    schema ||= form.object.presentation_data_json_schema
     presentation_data ||= form.object.presentation_data
   end
 
-  schema ||= []
-  presentation_data ||= {}
-  embedded_image_url ||= wcms_components_embedded_images_url
+  if presentation_data == {}
+    # Use nil instead of {} for json editor to work properly
+    presentation_data = nil
+  end
+  schema ||= ""
 
-= wcms_component "shared/embedded_image_uploader",
-  embedded_image_url: embedded_image_url
+/ This is the wrapper for the json-editor
+#presentation_data_editor data-schema=schema data-startval=presentation_data.try(:to_json)
 
-
-/ Link to toggle between simple and advanced editors
-- if current_user.try(:admin?)
-  - if params[:edit_raw_data] == 'true'
-      = link_to('Simple Editor', params.merge(edit_raw_data: nil), class: 'pull-right')
-  - else
-      = link_to('Edit Raw Data', params.merge(edit_raw_data: true), class: 'pull-right')
-  .clearfix
-
-
-- if params[:edit_raw_data] == 'true' && current_user.try(:admin?)
-  / Render JSON editor
-  = wcms_component 'forms/json_editor',
-    form: form,
-    attribute: :presentation_data_json
-
-- else
-  / Render HTML for presentation data editor
-  = PresentationDataEditor.new(self, presentation_data, schema, form).render
+/ Every time the json-editor form changes, we put the raw json string into this hidden field.
+/ This is what actually gets saved. I was having problems when submitting the form normally with
+/ arrays. Also you had to do some hacky stuff when athorizing parameters when you did it that way.
+- if form
+  = form.hidden_field 'presentation_data_json', id: 'pdata'

@@ -10,6 +10,28 @@ ruby:
   templates = PresentationDataTemplate
   templates = templates.where(target_class: target_class) if target_class
 
-p Please select a template for this presentation data.
+.form-group
+  label
+    = form.check_box :keep_in_sync
+    = ' Use Template'
+  p Uncheck this if you want to create a one time custom schema for this object
+  - unless form.object.keep_in_sync
+    .alert.alert-warning If you turn this back on, any changes you have made below will get overwritten
 
-= form.collection_select :presentation_data_template_id, templates.asc(:title), :id, :title, {include_blank: true}, class: 'form-control'
+- if form.object.keep_in_sync
+  hr
+  .form-group
+    = form.label :presentation_data_template_id, 'Template'
+    = form.collection_select :presentation_data_template_id, templates.asc(:title), :id, :title, {include_blank: true}, class: 'form-control'
+
+- if form.object.keep_in_sync && form.object.presentation_data_template_id.present?
+  pre = form.object.presentation_data_json_schema
+
+- elsif !form.object.keep_in_sync
+  hr
+  label Custom Data Schema
+  p See #{link_to('json-schema.org', 'http://json-schema.org/')} for spec and examples.
+  / Render JSON editor
+  = wcms_component 'forms/json_editor',
+    form: form,
+    attribute: :presentation_data_json_schema

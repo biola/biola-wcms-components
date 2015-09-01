@@ -13,6 +13,8 @@
 #= require bootstrap-multiselect
 #= require bootstrap-tagsinput
 #
+#= require json-editor
+#
 #= require redactor
 #= require redactor_fullscreen
 #= require redactor_table
