@@ -1,6 +1,14 @@
 # CHANGELOG
 
 ### Master (unreleased)
+
+### 0.16.0
+
+* Adding link to submenu to link back to wcms root.
+* Updated JSON schema to use the json-schema.org standard.
+* Replacing custom JSON editor with [json-editor](https://github.com/jdorn/json-editor/)
+* Updated redactor to v10.2.3
+
 ### 0.15.3
 
 * Added select_tag to the multiselect form element with attributes
