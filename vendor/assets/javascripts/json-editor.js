@@ -2092,6 +2092,7 @@ JSONEditor.defaults.editors.string = JSONEditor.AbstractEditor.extend({
           minHeight: 200,
           toolbarFixed: false,
           plugins: ['table', 'video', 'fullscreen'],
+          replaceDivs: false,
           syncCallback: function() {
             // Set the value and update
             self.input.value = this.code.get();
@@ -2103,7 +2104,7 @@ JSONEditor.defaults.editors.string = JSONEditor.AbstractEditor.extend({
 
         // Initialize redactor
         window.jQuery(self.input).redactor(options);
-        
+
         // Save object that redactor is attached to for later
         self.redactor_instance = window.jQuery(self.input)
       }
