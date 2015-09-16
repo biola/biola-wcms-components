@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.17.0
+
+* Make presentation data html editor able to use divs.
+
 ### 0.16.0
 
 * Adding link to submenu to link back to wcms root.
