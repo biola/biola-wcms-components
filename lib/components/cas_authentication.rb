@@ -49,13 +49,13 @@ class CasAuthentication
   end
 
   def update_extra_attributes!
-    user.biola_id     = extra_attr(:employeeId)                     if extra_attr_has_key?(:employeeId)
-    user.first_name   = extra_attr(:eduPersonNickname)              if extra_attr_has_key?(:eduPersonNickname)
-    user.last_name    = extra_attr(:sn)                             if extra_attr_has_key?(:sn)
-    user.email        = extra_attr(:mail)                           if extra_attr_has_key?(:mail)
-    user.photo_url    = extra_attr(:url).gsub('.jpg', '_large.jpg') if extra_attr_has_key?(:url)
-    user.entitlements = extra_attrs(:eduPersonEntitlement)          if extra_attr_has_key?(:eduPersonEntitlement)
-    user.affiliations = extra_attrs(:eduPersonAffiliation)          if extra_attr_has_key?(:eduPersonAffiliation)
+    user.biola_id     = extra_attr(:employeeId)            if extra_attr_has_key?(:employeeId)
+    user.first_name   = extra_attr(:eduPersonNickname)     if extra_attr_has_key?(:eduPersonNickname)
+    user.last_name    = extra_attr(:sn)                    if extra_attr_has_key?(:sn)
+    user.email        = extra_attr(:mail)                  if extra_attr_has_key?(:mail)
+    user.photo_url    = extra_attr(:url)                   if extra_attr_has_key?(:url)
+    user.entitlements = extra_attrs(:eduPersonEntitlement) if extra_attr_has_key?(:eduPersonEntitlement)
+    user.affiliations = extra_attrs(:eduPersonAffiliation) if extra_attr_has_key?(:eduPersonAffiliation)
     user.save
   end
   alias :create_user! :update_extra_attributes!
