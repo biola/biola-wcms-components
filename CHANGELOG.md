@@ -2,6 +2,8 @@
 
 ### Master (unreleased)
 
+### 0.18.0
+
 * collection select can set include blank with a message
 * redactor toolbar z-index fix
 
