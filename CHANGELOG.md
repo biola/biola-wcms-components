@@ -2,6 +2,9 @@
 
 ### Master (unreleased)
 
+* collection select can set include blank with a message
+* redactor toolbar z-index fix
+
 ### 0.17.0
 
 * Make presentation data html editor able to use divs.
