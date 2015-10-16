@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.18.1
+
+* Updating site nav to let you set the text for the menu dropdown.
+
 ### 0.18.0
 
 * collection select can set include blank with a message
