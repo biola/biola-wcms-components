@@ -14,6 +14,7 @@
 /
 
 ruby:
+  site_name ||= "Menu" # This will be "WCMS" or "News Publisher", etc.
   menu ||= []
   default_crumbs = []
 
@@ -31,11 +32,11 @@ ruby:
 #wcms_site_navigation
   .container
     = link_to fa_icon('home'), '/', class: 'top-nav-link'
-    
+
     - if menu.present?
       i class='fa fa-angle-right'
       .dropdown.custom-dropdown
-        a.dropdown-toggle href='#' data-toggle='dropdown' role='button' Menu
+        a.dropdown-toggle href='#' data-toggle='dropdown' role='button' = site_name
         ul.dropdown-menu
           - menu.each do |link|
             = nav_link(link[:body], link[:url])
