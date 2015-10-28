@@ -4,22 +4,18 @@ class WcmsComponents::ChangeController < ApplicationController
   before_filter :pundit_authorize
 
   def index
-    if params[:klass].present?
-      @changes = policy_scope(Change)
-      @changes = @changes.where(association_chain: {'$elemMatch' => {name: params[:klass].classify}})
+    @changes = policy_scope(Change)
+    @changes = @changes.where(association_chain: {'$elemMatch' => {name: params[:klass].classify}})
 
-      # Filter Values
-      @available_users = User.find @changes.distinct(:modifier)
+    # Filter Values
+    @available_users = User.find @changes.distinct(:modifier)
 
-      @changes = @changes.where(modifier_id: params[:user_id]) if params[:user_id].present?
-      @changes = @changes.where(action: params[:action_taken]) if params[:action_taken].present?
-      @changes = @changes.by_last_change(params[:last_change]) if params[:last_change].present?
+    @changes = @changes.where(modifier_id: params[:user_id]) if params[:user_id].present?
+    @changes = @changes.where(action: params[:action_taken]) if params[:action_taken].present?
+    @changes = @changes.by_last_change(params[:last_change]) if params[:last_change].present?
 
-      @changes = @changes.desc(:updated_at)
-      @changes = @changes.page(params[:page]).per(25)
-    else
-      redirect_to :back
-    end
+    @changes = @changes.desc(:updated_at)
+    @changes = @changes.page(params[:page]).per(25)
   end
 
   def undo

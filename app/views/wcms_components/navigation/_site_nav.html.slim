@@ -52,4 +52,4 @@ ruby:
 
     - if params[:action] == 'index' && params[:controller] != 'publishers' && params[:klass].nil?
       .pull-right
-        .btn.btn-default = link_to 'History', wcms_components_change_index_path(klass: params[:controller])
+        = link_to 'History', wcms_components_change_index_path(klass: params[:controller]), class: "top-nav-link"
