@@ -5,4 +5,4 @@
         .alert class=alert_class(msg[:type]) data-type=msg[:type]
           a.close data-dismiss="alert" href="#" &times;
           i> class=alert_icon(msg[:type])
-          = msg[:message]
+          = msg[:message].html_safe

@@ -45,4 +45,11 @@ ruby:
 
     - crumbs.each do |crumb|
       i class='fa fa-angle-right'
-      = link_to crumb[:body], crumb[:url], class: 'top-nav-link'
+      - if crumb[:body] == "Change"
+        = link_to crumb[:body], '#', class: 'top-nav-link'
+      - else
+        = link_to crumb[:body], crumb[:url], class: 'top-nav-link'
+
+    - if params[:action] == 'index' && params[:controller] != 'publishers' && params[:klass].nil?
+      .pull-right
+        = link_to 'History', wcms_components_change_index_path(klass: params[:controller]), class: "top-nav-link"

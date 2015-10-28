@@ -1,0 +1,28 @@
+.container.page
+  h3 = "#{params[:klass].titleize.singularize} changes"
+  .page-header
+    ul.nav.nav-pills.pull-left
+      = nav_pill_header 'Options'
+      - if @available_users.present?
+        = nav_pill_dropdown 'User', :user do
+          - @available_users.each do |user|
+            = nav_list_link user, :user_id, user.id
+      = nav_pill_dropdown 'Action', :action_taken do
+        = nav_list_link 'Create', :action_taken, 'create'
+        = nav_list_link 'Update', :action_taken, 'update'
+        = nav_list_link 'Destroy', :action_taken, 'destroy'
+      = nav_pill_dropdown 'Last Changed', :last_change do
+        = nav_list_link 'Today', :last_change, Date.today
+        = nav_list_link 'Yesterday', :last_change, 1.day.ago.to_date
+        = nav_list_link "Last #{1.week.ago.strftime('%A')}", :last_change, 1.week.ago.to_date
+        = nav_list_link 1.month.ago.strftime('%B %e'), :last_change, 1.month.ago.to_date
+    .clearfix
+
+  - if @changes.empty?
+    .alert.alert-warning
+      = fa_icon 'warning', text: "No changes were found"
+  - else
+    = render 'changes'
+
+  .text-center = paginate @changes
+
