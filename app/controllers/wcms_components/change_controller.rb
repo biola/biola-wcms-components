@@ -19,6 +19,7 @@ class WcmsComponents::ChangeController < ApplicationController
   end
 
   def object_index
+    # Retrieve object of who's history you are desiring after.
     object = params[:klass].safe_constantize.find(params[:id])
     @changes = []
     @available_users = []
@@ -29,7 +30,14 @@ class WcmsComponents::ChangeController < ApplicationController
     @changes += set_filters(object_history)
 
     # Retrieve applicable nested object histories defined in the respective publishers settings
-    fetch_nested_histories(object)
+    fetch_nested_histories(object) do |histories|
+      if histories.present?
+        @available_users += User.find(histories.distinct(:modifier_id))
+        @changes += set_filters(histories)
+      end
+    end
+
+    @available_users.uniq!
 
     @changes.sort!{ |a,b| b.created_at <=> a.created_at }
   end
@@ -71,21 +79,16 @@ class WcmsComponents::ChangeController < ApplicationController
     changes
   end
 
-  def fetch_nested_histories(object)
-    relations = Settings.trackable_relations[params[:klass]]
-    if relations.present?
-      relations = relations.map{ |rels| object.send(rels) }.flatten
-      relations.map do |relation|
-        relation_tracks = relation.history_tracks
-        if relation_tracks.present?
-          @available_users += User.find(relation_tracks.distinct(:modifier_id))
+  def fetch_nested_histories(object, &block)
+    # Trackable relations is an array of nested (e.g. has_many/belongs_to) relationships (e.g. ["attachments", "concentrations"])
+    #  for a given class. Embedded documents are handled by Mongoid History.
+    if relations = Settings.trackable_relations[params[:klass]]
 
-          # Apply the filters -- if there are no results then it will be as an empty array
-          @changes += set_filters(relation_tracks)
+      # Getting all the related objects for each relationship.
+      all_related_objects = relations.map{ |rels| object.send(rels) }.flatten
 
-          @available_users.uniq!
-        end
-      end
+      # Passing the histories as a parameter to the block defined in object_index
+      all_related_objects.each { |related_object| block.call(related_object.history_tracks) }
     end
   end
 

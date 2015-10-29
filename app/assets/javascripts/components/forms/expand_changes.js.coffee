@@ -1,11 +1,27 @@
+# Used in Changes. For each recorded change if there is more than two changed fields
+#  hide all but the first two and provide a link to show the rest.
+
 $(document).ready ->
+  onClickMoreLink = (event) ->
+    link = $(event.target)
+    # Show all the list items
+    link.siblings('li').show()
+    # Hide the show more link
+    link.hide()
+    # Prevent the page from scrolling to the top
+    false
+
   $('.change_history ul.changes').each ->
-    if $(this).children('li').length > 2
-      $(this).children('li').slice(2).hide()
-      $(this).children('a').show()
+    ul = $(this)
+    lis = ul.children('li')
+    # If there are more than two list items
+    if lis.length > 2
+      # Show only the first two initially
+      lis.slice(2).hide()
 
-      $(this).children('a').click (event) ->
-        $(this).siblings('li').show()
-        $(this).hide()
-        event.preventDefault()
-
+      # Create a link
+      show_more_link = $('<a class="show_more_link" href="#">Expand</a>')
+      # Add a click event to the link
+      show_more_link.click(onClickMoreLink)
+      # Add the link to the DOM
+      ul.append(show_more_link)
