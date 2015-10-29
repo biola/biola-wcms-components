@@ -4,10 +4,10 @@
       thead
       tr
         th
-        th Action
-        th User
-        th Created
-        th Changes
+        th.col-xs-2 Action
+        th.col-xs-2 User
+        th.col-xs-2 Created
+        th.col-xs-6 Changes
 
       tbody
         - @changes.each do |change|
@@ -21,7 +21,10 @@
             td
 
               ul.changes
-                strong = "Title: #{change.trackable.to_s}"
+                - if (change.association_chain.last[:name] != params[:klass]) && change.trackable.present?
+                  strong = "#{change.association_chain.last[:name].titleize} Title: #{change.trackable.to_s}"
+                - elsif params[:action] != 'object_index'
+                  strong = "Title: #{change.trackable.to_s}"
                 - (change.tracked_edits[:add]||[]).each do |k,v|
                   li.remove = "Added field #{k} value #{v}"
 

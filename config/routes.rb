@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :people, only: [:index], defaults: { format: 'json' }
     resources :tags, only: [:index], defaults: { format: 'json' }
     resources :change, only: :index do
+      get :object_index, on: :collection
       get :undo, on: :member
       get :undo_destroy, on: :member
     end
