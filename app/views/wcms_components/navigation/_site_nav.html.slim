@@ -50,6 +50,9 @@ ruby:
       - else
         = link_to crumb[:body], crumb[:url], class: 'top-nav-link'
 
-    - if params[:action] == 'index' && params[:controller] != 'publishers' && params[:klass].nil?
-      .pull-right
-        = link_to 'History', wcms_components_change_index_path(klass: params[:controller]), class: "top-nav-link"
+    / Example:
+    / - content_for :site_nav_right do
+    /   = link_to 'History', wcms_components_changes_path(klass: 'page_editions'), class: "top-nav-link"
+    - if content_for?(:site_nav_right)
+      #site_nav_right.pull-right
+        = yield(:site_nav_right)
