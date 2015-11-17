@@ -45,7 +45,7 @@ ruby:
 
     - crumbs.each do |crumb|
       i class='fa fa-angle-right'
-      - if crumb[:body] == "Change"
+      - if crumb[:body] == "Changes"
         = link_to crumb[:body], '#', class: 'top-nav-link'
       - else
         = link_to crumb[:body], crumb[:url], class: 'top-nav-link'
