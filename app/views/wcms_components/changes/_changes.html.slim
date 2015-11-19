@@ -1,3 +1,12 @@
+css:
+  a.morelink {
+      text-decoration:none;
+      outline: none;
+  }
+  .morecontent span {
+      display: none;
+  }
+
 .change_history
   .table-responsive style="overflow: scroll;"
     table.table.table-striped
@@ -25,18 +34,20 @@
             td
 
               ul.changes
+                / if the change belongs to a tracked child object display the title of the child object so that we know which it is
                 - if (change.association_chain.last[:name] != params[:klass]) && change.trackable.present?
                   strong = "#{change.association_chain.last[:name].titleize} Title: #{change.trackable.to_s}"
                 - elsif params[:action] != 'object_index'
                   strong = "Title: #{change.trackable.to_s}"
+                
                 - (change.tracked_edits[:add]||[]).each do |k,v|
-                  li.remove = "Added field #{k} value #{v}"
+                  li.remove.more = "Added field #{k} value #{v}"
 
                 - (change.tracked_edits[:modify]||[]).each do |k,v|
-                  li.modify = "Changed field #{k} from #{v[:from]} to #{v[:to]}"
+                  li.modify.more = "Changed field #{k} from #{v[:from]} to #{v[:to]}"
 
                 - (change.tracked_edits[:array]||[]).each do |k,v|
-                  li.modify
+                  li.modify.more
                     - if v[:remove].nil?
                       = "Changed field #{k} by adding #{v[:add]}"
                     - elsif v[:add].nil?
@@ -45,4 +56,5 @@
                       = "Changed field #{k} by adding #{v[:add]} and removing #{v[:remove]}"
 
                 - (change.tracked_edits[:remove]||[]).each do |k,v|
-                  li.remove = "Removed field #{k} (was previously #{v})"
+                  li.remove.more = "Removed field #{k} (was previously #{v})"
+                  
