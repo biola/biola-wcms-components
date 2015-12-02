@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "ace-rails-ap",         "~> 3.0"
-  spec.add_dependency "buweb_content_models", ">= 0.82"
+  spec.add_dependency "buweb_content_models", ">= 1.7"
   spec.add_dependency "coffee-rails",         ">= 4.0"
   spec.add_dependency "chronic_ping",         "~> 0.4"
   spec.add_dependency "jquery-ui-rails"

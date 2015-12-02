@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.19.0
+
+* Added Changes class for history tracking
+
 ### 0.18.1
 
 * Updating site nav to let you set the text for the menu dropdown.
