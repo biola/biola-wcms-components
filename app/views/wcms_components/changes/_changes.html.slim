@@ -1,0 +1,60 @@
+css:
+  a.morelink {
+      text-decoration:none;
+      outline: none;
+  }
+  .morecontent span {
+      display: none;
+  }
+
+.change_history
+  .table-responsive style="overflow: scroll;"
+    table.table.table-striped
+      thead
+      tr
+        th
+        th.col-xs-2 Action
+        th.col-xs-2 User
+        th.col-xs-2 Created
+        th.col-xs-6 Changes
+
+      tbody
+        - @changes.each do |change|
+          tr
+            td
+              - if change.action == 'destroy' && (change.trackable_root.present? || change.trackable.present?)
+                = link_to fa_icon('undo'), '#', data: { confirm: "This change has already been reversed and the object currently exists" }
+              - else
+                = link_to fa_icon('undo'), undo_wcms_components_change_path(change, owning_class: params[:klass], owning_id: params[:id]), data: { confirm: "Are you sure that you want to undo this change?" }
+            td
+              - if change.action.present?
+                = "#{change.action == 'destroy' ? 'Destroyed' : change.action.try(:humanize).to_s + 'd'} #{change.association_chain.last[:name].titleize}"
+            td = change.modifier.try(:to_s)
+            td = change.created_at.to_s(:long_ordinal)
+            td
+
+              ul.changes
+                / if the change belongs to a tracked child object display the title of the child object so that we know which it is
+                - if (change.association_chain.last[:name] != params[:klass]) && change.trackable.present?
+                  strong = "#{change.association_chain.last[:name].titleize} Title: #{change.trackable.to_s}"
+                - elsif params[:action] != 'object_index'
+                  strong = "Title: #{change.trackable.to_s}"
+                
+                - (change.tracked_edits[:add]||[]).each do |k,v|
+                  li.remove.more = "Added field #{k} value #{v}"
+
+                - (change.tracked_edits[:modify]||[]).each do |k,v|
+                  li.modify.more = "Changed field #{k} from #{v[:from]} to #{v[:to]}"
+
+                - (change.tracked_edits[:array]||[]).each do |k,v|
+                  li.modify.more
+                    - if v[:remove].nil?
+                      = "Changed field #{k} by adding #{v[:add]}"
+                    - elsif v[:add].nil?
+                      = "Changed field #{k} by removing #{v[:remove]}"
+                    - else
+                      = "Changed field #{k} by adding #{v[:add]} and removing #{v[:remove]}"
+
+                - (change.tracked_edits[:remove]||[]).each do |k,v|
+                  li.remove.more = "Removed field #{k} (was previously #{v})"
+                  

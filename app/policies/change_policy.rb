@@ -18,4 +18,5 @@ class ChangePolicy < ApplicationPolicy
   def index?
     true
   end
+  alias :object_index? :index?
 end
