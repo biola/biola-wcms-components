@@ -1,0 +1,20 @@
+/ Example
+/   = wcms_component 'forms/css_editor',
+/     form: f,
+/     attribute: :design_css,
+/     value: @page_edition.design_css
+/
+
+ruby:
+  form ||= nil
+  attribute ||= nil
+  html_class ||= 'form-control'
+  value ||= nil
+  embedded_image_url ||= wcms_components_embedded_images_url
+
+  # Set default value
+  # We have to do it this way in case value is an empty string (as opposed to nil).
+  value = value.presence || "# CSS data goes here...\n"
+
+.ace_css_editor
+  = wcms_component("forms/text_area", {form: form, attribute: attribute, html_class: html_class, value: value})
