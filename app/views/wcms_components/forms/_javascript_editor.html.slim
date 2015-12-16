@@ -14,7 +14,7 @@ ruby:
 
   # Set default value
   # We have to do it this way in case value is an empty string (as opposed to nil).
-  value = value.presence || "# Javascript goes here...\n"
+  value = value.presence || "// Javascript goes here...\n"
 
 .ace_javascript_editor
   = wcms_component("forms/text_area", {form: form, attribute: attribute, html_class: html_class, value: value})
