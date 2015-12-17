@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.20.0
+
+* Added Ace components for js and css text-area rendering of design elements for page editions.
+
 ### 0.19.0
 
 * Added Changes class for history tracking
@@ -12,8 +16,8 @@
 
 ### 0.18.0
 
-* collection select can set include blank with a message
-* redactor toolbar z-index fix
+* Collection select can set include blank with a message
+* Redactor toolbar z-index fix
 
 ### 0.17.0
 
