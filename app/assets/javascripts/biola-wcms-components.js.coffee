@@ -1,5 +1,7 @@
 #= require ace/ace
 #= require ace/mode-yaml
+#= require ace/mode-javascript
+#= require ace/mode-css
 #= require ace/mode-json
 #= require ace/worker-json
 #

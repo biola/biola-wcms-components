@@ -36,4 +36,3 @@ $(document).ready ->
       e.stopPropagation()
       fileUploader.sendFileToServer e.dataTransfer.files[0], 'embedded_image', (url) ->
         editor.insert('"' + url + '"')
-
