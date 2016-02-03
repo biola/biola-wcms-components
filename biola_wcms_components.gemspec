@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "coffee-rails",         ">= 4.0"
   spec.add_dependency "chronic_ping",         "~> 0.4"
   spec.add_dependency "jquery-ui-rails"
-  spec.add_dependency "pundit",               "~> 0.3"
+  spec.add_dependency "pundit",               ">= 0.3", "< 2"
   spec.add_dependency "sass-rails",           ">= 4.0"
   spec.add_dependency "slim",                 ">= 2.0"
   spec.add_development_dependency "bundler",  "~> 1.3"

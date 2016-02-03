@@ -2,6 +2,11 @@
 
 ### Master (unreleased)
 
+### 0.21.0
+
+* Setting default ruby version to 2.1.6
+* Allowing pundit v1
+
 ### 0.20.0
 
 * Added Ace components for js and css text-area rendering of design elements for page editions.
