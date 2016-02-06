@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.22.0
+
+* Adding support for user impersonation. This replaces the need for pretender.
+
 ### 0.21.0
 
 * Setting default ruby version to 2.1.6
