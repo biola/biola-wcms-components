@@ -9,12 +9,36 @@ class WcmsApplicationController < ActionController::Base
 
   layout -> { (@layout || :application).to_s }
 
-  helper_method :current_user
-  def current_user
+  def true_user
     authentication.user
   end
+  helper_method :true_user
+
+  def current_user
+    unless @current_user
+      # clear impersonation_id if true_user is not logged in
+      if session[:impersonation_id] && !true_user
+        session[:impersonation_id] = nil
+      end
+
+      # Fetch impersonated user from their ID, otherwise return true_user
+      @current_user = (session[:impersonation_id] && User.where(id: session[:impersonation_id]).first) || true_user
+    end
+    @current_user
+  end
+  helper_method :current_user
 
   protected
+
+  def impersonate_user(user)
+    @current_user = user
+    session[:impersonation_id] = user.id.to_s
+  end
+
+  def stop_impersonating_user
+    @impersonated_var = true_user
+    session[:impersonation_id] = nil
+  end
 
   def authenticate!
     authentication.perform or render_error_page(401)
