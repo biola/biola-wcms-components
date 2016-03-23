@@ -2,6 +2,11 @@
 
 ### Master (unreleased)
 
+### 0.23.0
+
+* Removing options to customize redactor toolbar. Not it shows all buttons by default and lets you add anything but script and style tags.
+* Fixing dependencies on jquery-rails and jquery-ui-rails
+
 ### 0.22.0
 
 * Adding support for user impersonation. This replaces the need for pretender.
