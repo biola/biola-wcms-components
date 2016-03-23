@@ -50,13 +50,8 @@
   z-index: 1051;
 }
 .redactor-toolbar {
-  z-index: 1;
-}
-
-.redactor-box-fullscreen .redactor-toolbar {
   z-index: 100;
 }
-
 .redactor-dropdown {
   z-index: 1052;
 }

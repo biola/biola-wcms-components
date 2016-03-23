@@ -2,7 +2,6 @@
 /   = wcms_component "forms/redactor_editor",
 /     form: f,
 /     attribute: :body,
-/     add_buttons: ['link']
 /
 
 
@@ -13,27 +12,10 @@ ruby:
   add_class ||= ""   # string of additional classes that get appended to class
   input_class ||= "form-control redactor #{add_class}"
   value ||= nil     # only used if form is nil
-  allow_divs ||= nil
-
-  # Configure buttons
-  buttons ||= BiolaWcmsComponents.config.default_redactor_buttons
-  add_buttons ||= []      # adds to defaults
-  remove_buttons ||= []   # removes from default
-  buttons = Array(buttons) + Array(add_buttons) - Array(remove_buttons)
-  buttons << 'html' if current_user.try(:admin?) || current_user.try(:developer?) || current_user.try(:designer?)
-  buttons << 'fullscreen'
-
-  formatting ||= []
-  buttons.unshift 'formatting' if formatting.length > 0
-
-
-  # Turn buttons and formatting into a string and remove duplicates
-  buttons = buttons.uniq.join(' ')
-  formatting = formatting.uniq.join(' ')
 
 = wcms_component "shared/embedded_image_uploader"
 
 - if form
-  = form.text_area attribute, class: input_class, 'data-buttons' => buttons, 'data-formatting' => formatting, 'data-allow-divs' => allow_divs
+  = form.text_area attribute, class: input_class
 - else
-  = text_area_tag attribute, value, class: input_class, 'data-buttons' => buttons, 'data-formatting' => formatting, 'data-allow-divs' => allow_divs
+  = text_area_tag attribute, value, class: input_class
