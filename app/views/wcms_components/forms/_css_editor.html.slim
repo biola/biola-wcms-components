@@ -1,16 +1,3 @@
-/ Example
-/   = wcms_component 'forms/css_editor',
-/     form: f,
-/     attribute: :design_css,
-/     value: @page_edition.design_css
-/
-
-ruby:
-  form ||= nil
-  attribute ||= nil
-  html_class ||= 'form-control'
-  value ||= nil
-  embedded_image_url ||= wcms_components_embedded_images_url
-
-.ace_css_editor
-  = wcms_component("forms/text_area", {form: form, attribute: attribute, html_class: html_class, value: value})
+/ Depricated, use forms/code_editor instead
+- local_assigns[:mode] = 'css'
+= wcms_component("forms/code_editor", local_assigns)

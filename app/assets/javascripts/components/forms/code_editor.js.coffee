@@ -1,11 +1,12 @@
 $(document).ready ->
-  $('.ace_json_editor').each ->
+  $('.ace_code_editor').each ->
     editor_area = document.createElement('div')
     this.appendChild(editor_area)
+    mode = "ace/mode/" + this.dataset.mode
 
     # Initialize Ace Editor
     editor = ace.edit(editor_area)
-    editor.getSession().setMode("ace/mode/json")
+    editor.getSession().setMode(mode)
     editor.getSession().setTabSize(2)
     editor.getSession().setUseWrapMode(true);
     editor.setPrintMarginColumn(800)

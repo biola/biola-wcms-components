@@ -1,0 +1,22 @@
+/ Example
+/   = wcms_component 'forms/code_editor',
+/     form: f,
+/     mode: 'html',
+/     attribute: :design_javascript,
+/     value: @page_edition.design_javascript
+/
+
+ruby:
+  form ||= nil
+  attribute ||= nil
+  html_class ||= 'form-control'
+  value ||= nil
+  mode ||= 'html'
+  #embedded_image_url ||= wcms_components_embedded_images_url
+
+/ TODO: do we need this? It was being used in the json_editor, but I don't think we
+/ are using it anymore.
+/ = wcms_component("shared/embedded_image_uploader", embedded_image_url: embedded_image_url)
+
+.ace_code_editor data-mode=mode
+  = wcms_component("forms/text_area", {form: form, attribute: attribute, html_class: html_class, value: value})
