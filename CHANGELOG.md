@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.24.0
+
+* Adding generic code_editor component.
+
 ### 0.23.0
 
 * Removing options to customize redactor toolbar. Not it shows all buttons by default and lets you add anything but script and style tags.
