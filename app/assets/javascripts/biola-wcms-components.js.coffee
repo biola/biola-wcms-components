@@ -3,6 +3,7 @@
 #= require ace/mode-javascript
 #= require ace/mode-css
 #= require ace/mode-json
+#= require ace/mode-html
 #= require ace/worker-json
 #
 #  Handlebars and typeahead are needed for the person-lookup component

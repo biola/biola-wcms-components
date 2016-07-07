@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.24.1
+
+* Required ace/mode-html for syntax highlighting.
+
 ### 0.24.0
 
 * Adding generic code_editor component.
