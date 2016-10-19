@@ -22,8 +22,8 @@ class WcmsComponents::PeopleController < ApplicationController
   private
 
   def permitted_people
-    # Return all people who are either employees, faculty, or not private.
-    Person.where({'$or' => [{affiliations: 'employee'}, {affiliations: 'faculty'}, {privacy: { '$ne' => true }}] })
+    # Return all people who are either employees, faculty, trustees, contractors, or not private.
+    Person.where({'$or' => [{affiliations: 'employee'}, {affiliations: 'faculty'}, {affiliations: 'trustee'}, {affiliations: 'contractor'}, {privacy: { '$ne' => true }}] })
   end
 
   def can_search_people?
