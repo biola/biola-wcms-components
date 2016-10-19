@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.24.2
+
+* Allow trustees and contractors in people search results
+
 ### 0.24.1
 
 * Required ace/mode-html for syntax highlighting.
