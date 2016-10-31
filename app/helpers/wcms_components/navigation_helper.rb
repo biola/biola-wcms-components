@@ -4,8 +4,9 @@ module WcmsComponents
     # Set class on active navigation items
     def nav_link(text, path_helper)
       # The router can't match against a relative root in the path
-      # so we need to strip it out with script_name: nil.
-      router_path = send(path_helper, script_name: nil)
+      # so we need to strip it out with script_name: ''.
+      # Note: passing nil as the script_name does not work
+      router_path = send(path_helper, script_name: '')
       real_path = send(path_helper)
 
       recognized = ::Rails.application.routes.recognize_path(router_path)
