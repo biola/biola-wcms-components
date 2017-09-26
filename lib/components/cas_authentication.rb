@@ -1,26 +1,24 @@
+##
+# Authenticate User and Create Session
 class CasAuthentication
   def initialize(session)
     @session = session
   end
 
   def user
-    if username.present?
-      @user ||= User.find_or_initialize_by(username: username)
-    end
+    return unless username.present?
+    @user ||= User.find_or_initialize_by(username: username)
   end
 
   def perform
-    if authenticated?
-      true
-    elsif present?
-      if new_user?
-        if create_user!
-          authenticate!
-        end
-      elsif unauthenticated?
-        authenticate!
-        update_extra_attributes!
-      end
+    return true if authenticated?
+    return unless session['cas'].present?
+
+    if new_user?
+      authenticate! if create_user!
+    elsif unauthenticated?
+      authenticate!
+      update_extra_attributes!
     end
   end
 
@@ -33,7 +31,7 @@ class CasAuthentication
   end
 
   def new_user?
-    !!user.try(:new_record?)
+    user.try(:new_record?)
   end
 
   def authenticated?
@@ -58,10 +56,10 @@ class CasAuthentication
     user.affiliations = extra_attrs(:eduPersonAffiliation) if extra_attr_has_key?(:eduPersonAffiliation)
     user.save
   end
-  alias :create_user! :update_extra_attributes!
+  alias create_user! update_extra_attributes!
 
   def username
-    session[:username] || attrs['user']
+    (session[:username] || attrs['user']).downcase
   end
 
   def attrs
@@ -73,7 +71,7 @@ class CasAuthentication
   end
 
   def extra_attr_has_key?(key)
-    extra_attributes.has_key? key
+    extra_attributes.key? key
   end
 
   def extra_attr(key)
