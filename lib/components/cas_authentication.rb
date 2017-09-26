@@ -61,7 +61,7 @@ class CasAuthentication
   alias :create_user! :update_extra_attributes!
 
   def username
-    session[:username] || attrs['user']
+    (session[:username] || attrs['user']).downcase
   end
 
   def attrs
