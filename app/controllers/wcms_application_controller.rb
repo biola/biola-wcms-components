@@ -41,7 +41,7 @@ class WcmsApplicationController < ActionController::Base
   end
 
   def authenticate!
-    authentication.perform or render_error_page(401)
+    authentication.perform || render_error_page(401)
   end
 
   def authentication
@@ -49,11 +49,13 @@ class WcmsApplicationController < ActionController::Base
   end
 
   def render_error_page(status)
-    render file: "#{Rails.root}/public/#{status}", formats: [:html], status: status, layout: false
+    render file: "#{Rails.root}/public/#{status}",
+           formats: [:html],
+           status: status,
+           layout: false
   end
 
   def user_not_authorized
     render_error_page(403)
   end
-
 end
