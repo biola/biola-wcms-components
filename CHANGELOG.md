@@ -2,6 +2,11 @@
 
 ### Master (unreleased)
 
+### 0.25.0
+
+* Removes support for RubyCAS
+* Adds support for JavaCAS
+
 ### 0.24.3
 
 * Fix nav_link helper method. You have to pass '' for script_name option instead of nil.
