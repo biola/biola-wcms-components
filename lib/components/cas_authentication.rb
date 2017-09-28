@@ -5,6 +5,16 @@ class CasAuthentication
     @session = session
   end
 
+  USER_CAS_MAP = {
+    biola_id: :employeeId,
+    first_name: :eduPersonNickname,
+    last_name: :sn,
+    email: :mail,
+    photo_url: :url,
+    entitlements: :eduPersonEntitlement,
+    affiliations: :eduPersonAffiliation
+  }.freeze
+
   def user
     return unless username.present?
     @user ||= User.find_or_initialize_by(username: username)
@@ -47,13 +57,11 @@ class CasAuthentication
   end
 
   def update_extra_attributes!
-    user.biola_id     = extra_attr(:employeeId)            if extra_attr_has_key?(:employeeId)
-    user.first_name   = extra_attr(:eduPersonNickname)     if extra_attr_has_key?(:eduPersonNickname)
-    user.last_name    = extra_attr(:sn)                    if extra_attr_has_key?(:sn)
-    user.email        = extra_attr(:mail)                  if extra_attr_has_key?(:mail)
-    user.photo_url    = extra_attr(:url)                   if extra_attr_has_key?(:url)
-    user.entitlements = extra_attrs(:eduPersonEntitlement) if extra_attr_has_key?(:eduPersonEntitlement)
-    user.affiliations = extra_attrs(:eduPersonAffiliation) if extra_attr_has_key?(:eduPersonAffiliation)
+    USER_CAS_MAP.each do |k, v|
+      value = extra_attrs.fetch(v, nil)
+      user[k] = value unless value.blank?
+    end
+
     user.save
   end
   alias create_user! update_extra_attributes!
@@ -66,20 +74,7 @@ class CasAuthentication
     @attrs ||= (session['cas'] || {}).with_indifferent_access
   end
 
-  def extra_attributes
-    @extra_attributes ||= (attrs['extra_attributes'] || {}).with_indifferent_access
-  end
-
-  def extra_attr_has_key?(key)
-    extra_attributes.key? key
-  end
-
-  def extra_attr(key)
-    # Many values come back as arrays but don't really need to be
-    extra_attrs(key).first
-  end
-
-  def extra_attrs(key)
-    Array(extra_attributes[key]).map(&:to_s)
+  def extra_attrs
+    @extra_attrs ||= (attrs[:extra_attributes] || {}).with_indifferent_access
   end
 end
