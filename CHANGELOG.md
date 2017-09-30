@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.25.2
+
+* Only update CAS attributes if they exist
+
 ### 0.25.1
 
 * Enforce extra attributes to be the right type
