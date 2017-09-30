@@ -27,13 +27,13 @@ class CasAuthentication
   attr_reader :session
 
   USER_CAS_MAP = {
-    biola_id: { employeeId: Integer },
-    first_name: :eduPersonNickname,
-    last_name: :sn,
-    email: :mail,
-    photo_url: :url,
-    entitlements: { eduPersonEntitlement: Array },
-    affiliations: { eduPersonAffiliation: Array }
+    employeeId: { biola_id: Integer },
+    eduPersonNickname: :first_name,
+    sn: :last_name,
+    mail: :email,
+    url: :photo_url,
+    eduPersonEntitlement: { entitlements: Array },
+    eduPersonAffiliation: { affiliations: Array }
   }.freeze
 
   def present?
@@ -57,9 +57,12 @@ class CasAuthentication
   end
 
   def update_extra_attributes!
-    USER_CAS_MAP.each do |k, v|
-      user[k] = attr_value(v, extra_attrs)
+    USER_CAS_MAP.each do |attr_key, opt|
+      next unless extra_attrs.key?(attr_key)
+      key, type = user_key_type(opt)
+      user[key] = attr_value(extra_attrs[attr_key], type)
     end
+
     user.save
   end
   alias create_user! update_extra_attributes!
@@ -76,17 +79,15 @@ class CasAuthentication
     @extra_attrs ||= (attrs[:extra_attributes] || {}).with_indifferent_access
   end
 
-  def attr_value(key, opts = {})
-    return String(opts[key]) if key.is_a? Symbol
-    attr_hash(key, opts)
+  def attr_value(value, type = nil)
+    return Array(value).compact if type == Array
+    return Integer(value) if type == Integer &&
+                             /\A\d+\z/ =~ value.to_s
+    String(value)
   end
 
-  def attr_hash(hash, opts = {})
-    return unless hash.is_a? Hash
-
-    key, type = hash.first
-    return Array(opts.try(:[], key)).compact if type == Array
-    return Integer(opts.try(:[], key)) if type == Integer &&
-                                          /\A\d+\z/ =~ opts[key].to_s
+  def user_key_type(opt)
+    return opt if opt.is_a? Symbol
+    opt.first
   end
 end
