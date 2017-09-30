@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.25.1
+
+* Enforce extra attributes to be the right type
+
 ### 0.25.0
 
 * Removes support for RubyCAS
