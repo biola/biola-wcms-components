@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.25.4
+
+* Removed .css file extension from stylesheets
+
 ### 0.25.3
 
 * Minor updates to CAS to handle possible use cases
