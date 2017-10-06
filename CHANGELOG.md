@@ -2,6 +2,10 @@
 
 ### Master (unreleased)
 
+### 0.25.3
+
+* Minor updates to CAS to handle possible use cases
+
 ### 0.25.2
 
 * Only update CAS attributes if they exist
