@@ -41,7 +41,8 @@ class CasAuthentication
   end
 
   def new_user?
-    user.try(:new_record?)
+    return unless user.present?
+    user.new_record?
   end
 
   def authenticated?
@@ -68,7 +69,7 @@ class CasAuthentication
   alias create_user! update_extra_attributes!
 
   def username
-    (session[:username] || attrs[:user]).downcase
+    (session[:username] || attrs[:user]).try(:downcase)
   end
 
   def attrs
